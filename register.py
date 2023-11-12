@@ -19,7 +19,6 @@ dashboard = None
 def on_enter(window, user, password, loginwindow):
 
     global dashboard
-    window.hide()
 
     # Mở file JSON ở chế độ đọc và ghi
     with open('data.json', 'r+') as f:
@@ -39,10 +38,11 @@ def on_enter(window, user, password, loginwindow):
             f.seek(0)
             json.dump(data, f, indent=4)
             f.truncate()
-        with open('currentuser.txt', 'w') as current:
-            current.write(user.text())
-        dashboard = DashBoard(loginwindow)
-        QTimer.singleShot(100, window.close)
+            with open('currentuser.txt', 'w') as current:
+                current.write(user.text())
+            dashboard = DashBoard(loginwindow)
+            QTimer.singleShot(100, window.close)
+
         
 
 
